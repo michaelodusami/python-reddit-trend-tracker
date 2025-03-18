@@ -41,7 +41,7 @@ This project **extracts trending Reddit posts** from a subreddit, **performs sen
 ┌──────────────────────────┐
 │  PostgreSQL (Star Schema)│
 │  - fact_posts           │
-│  - dim_authors          │
+│  - dim_authors
 │  - dim_subreddit        │
 │  - dim_date             │
 └──────────┬──────────────┘
@@ -69,6 +69,7 @@ Ensure you have **Python 3.8+** installed. Then, install the required libraries:
 ```bash
 pip install praw pandas textblob sqlalchemy psycopg2
 ```
+Make sure to setup the praw configuration from praw's docs.
 
 ### **🔹 3. Set Up PostgreSQL Database**  
 1. Open **PostgreSQL** and create a new database:  
@@ -98,14 +99,14 @@ psql -U your_user -d reddit_dw -f setup_schema.sql
 #### **1. `dim_authors`** (Stores unique Reddit users)  
 | Column      | Type         | Description          |
 |------------|-------------|----------------------|
-| author_id  | SERIAL (PK) | Unique author ID    |
-| author     | VARCHAR(255) | Reddit username    |
+| id  | SERIAL (PK) | Unique author ID    |
+| author_name     | VARCHAR(255) | Reddit username    |
 
 #### **2. `dim_subreddit`** (Stores subreddit info)  
 | Column        | Type        | Description          |
 |--------------|------------|----------------------|
-| subreddit_id | SERIAL (PK) | Unique subreddit ID |
-| subreddit    | VARCHAR(255) | Subreddit name     |
+| id | SERIAL (PK) | Unique subreddit ID |
+| subreddit_name    | VARCHAR(255) | Subreddit name     |
 
 #### **3. `dim_date`** (Stores post dates)  
 | Column       | Type         | Description          |
@@ -164,35 +165,14 @@ LIMIT 10;
 
 ---
 
-## 📊 **Results & Insights**  
-- 60% of posts in `r/AskScience` were **positive** in sentiment.  
-- The **top-scoring post** had **12,500+ upvotes** and discussed AI's impact on science.  
-- The **most active author** contributed **over 15 posts** in a single day.  
 
----
 
-## 📝 **Future Improvements**  
+## 📝 **Later Improvements**  
 - **Enhance Sentiment Analysis**: Use **NLTK** or a **machine learning model** instead of `TextBlob`.  
 - **Streamline with Apache Airflow**: Automate ETL pipeline scheduling.  
 - **Deploy on AWS**: Store processed data in **Amazon S3**, run queries using **AWS Athena**.  
 - **Create a Web Dashboard**: Use **Tableau or Power BI** to visualize Reddit trends.  
 
----
-
-## 🤝 **Contributing**  
-Pull requests are welcome! If you find a bug or want to suggest an enhancement, feel free to open an issue.  
-
----
-
-## 📜 **License**  
-MIT License. Free to use, modify, and distribute.  
-
----
-
-## 🎯 **Final Thoughts**  
-🚀 This project demonstrates **ETL, data warehousing, SQL, Python, and AI integration** in a unique way. Whether for a **hackathon** or a **resume portfolio**, this is an **impressive data engineering project** that showcases **practical and high-demand skills**.  
-
----
 
 **🌟 Ready to dive into the data? Clone, run, and explore the trends!**  
 
